@@ -1,7 +1,5 @@
 ![# Down The Plumeria Lane](resources/images/misc/header.png)
 
-<center>A small experimental RPG project.</center>
-
 ## Memorandum
 
 This is a school project started as a means of learning to use Java and the Swing graphics library over the course of a year. As a project done for educational purposes, the initial code quality will be poor, development will be slow, and whether development will be pushed beyond the initial one year timeframe is largely tentative. For the same reason, if you're not a collaborator, please refrain from contributing until the end of the specified timeframe (June 2023). Issues are OK.
