@@ -8,16 +8,16 @@ This is a school project started as a means of learning to use Java and the Swin
 
 - [x] Title Interface
 - [x] Settings Interface
-- [ ] Character Naming Interface (chippy i'm at my wit's end please make that PR already)
+- [ ] Character Naming Interface (chippy please submit the PR already)
 - [ ] Paused Interface
-- [ ] The Actual GameTM (you haven't even started the actual game? the hell dude)
+- [ ] The Actual GameTM
 
 ## Building
 
-Builds are usually published with every commit. If you'd like to compile the project yourself, try the following steps:
+Builds are usually [published](https://github.com/twofacedflora/Down-The-Plumeria-Lane/releases) with every commit. If you'd like to compile the project yourself, try the following steps:
 
 1. Ensure you have _at least_ JDK 8 installed. You can download the latest release from [Oracle](https://www.oracle.com/java/technologies/downloads/). Alternative JDKs such as [Liberica](https://bell-sw.com/pages/downloads/) should work fine.
-2. [Download the repository](https://github.com/Anuken/Mindustry/archive/refs/heads/master.zip).
+2. [Download](https://github.com/Anuken/Mindustry/archive/refs/heads/master.zip) the repository.
 3. Open the project folder in a terminal and run `./build.sh`.
 
 ### Troubleshooting
