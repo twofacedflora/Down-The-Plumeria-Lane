@@ -7,6 +7,7 @@ Builds are usually [published](https://github.com/twofacedflora/Down-The-Plumeri
 1. Ensure you have the latest Java version installed. You can download the latest release from [Oracle](https://www.oracle.com/java/technologies/downloads/). OpenJDK builds such as [Liberica JDK](https://bell-sw.com/pages/downloads/) should work fine.
 2. [Download](https://github.com/Anuken/Mindustry/archive/refs/heads/master.zip) the repository.
 3. Open the project folder in a terminal and run `./build.sh`.
+4. The compiled project should appear in `output`.
 
 ### Troubleshooting
 
