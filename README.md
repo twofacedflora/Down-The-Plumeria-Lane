@@ -1,31 +1,39 @@
 ![# Down The Plumeria Lane](resources/images/misc/header.png)
 
-## Memorandum
-
-This is a school project started as a means of learning to use Java and the Swing graphics library over the course of a year. As a project done for educational purposes, the initial code quality will be poor, development will be slow, and whether development will be pushed beyond the initial one year timeframe is largely tentative. For the same reason, if you're not a collaborator, please refrain from contributing until the end of the specified timeframe (June 2023). Issues are OK.
-
-## To-Do
-
-- [x] Title Interface
-- [x] Settings Interface
-- [ ] Character Naming Interface (chippy please submit the PR already)
-- [ ] Paused Interface
-- [ ] The Actual GameTM
-
 ## Building
 
 Builds are usually [published](https://github.com/twofacedflora/Down-The-Plumeria-Lane/releases) with every commit. If you'd like to compile the project yourself, try the following steps:
 
-1. Ensure you have _at least_ JDK 8 installed. You can download the latest release from [Oracle](https://www.oracle.com/java/technologies/downloads/). Alternative JDKs such as [Liberica](https://bell-sw.com/pages/downloads/) should work fine.
+1. Ensure you have the latest Java version installed. You can download the latest release from [Oracle](https://www.oracle.com/java/technologies/downloads/). OpenJDK builds such as [Liberica JDK](https://bell-sw.com/pages/downloads/) should work fine.
 2. [Download](https://github.com/Anuken/Mindustry/archive/refs/heads/master.zip) the repository.
 3. Open the project folder in a terminal and run `./build.sh`.
 
 ### Troubleshooting
 
+**Java Application Launch Failed**
+
+Open the terminal and run `java -jar <PATH_TO_JAR>`. It's known that opening the program using JavaLauncher causes it to crash. The reason for this is currently unknown.
+
+**Cannot Access File**
+
+Ensure that you're entering the correct pathname. In some cases, the run command is case sensitive, so something like `java -jar output/dtpl.jar` won't work.
+
 **Permission Denied (macOS/Linux only)**
 
-The script isn't executable. Run `chmod +x build.sh`.
+Run `chmod +x build.sh` to give yourself access to open the file.
+
+**Program Terminates Upon Closing Terminal**
+
+Not so much a problem, but if you want the program to run even after closing the terminal, prepend `nohup` to the run command. If you don't want `nohup` to generate `nohup.out`, append `>/dev/null 2>&1` to the run command as well.
 
 **Didn't help?**
 
 If you're experiencing a problem that isn't documented in this section, [open an issue](https://github.com/twofacedflora/Down-The-Plumeria-Lane/issues/new) about it.
+
+## TODO ドンマイ
+
+- [x] IDK WHERE THE DS_STORE FILES ARE COMING FROM BUT REMOVE THEM!!
+- [ ] teach chippy how to set up a remote repo and make a PR
+- [ ] clean up the codebase for the nth time
+- [ ] set up discord webhook action for ease of mind
+- [ ] rewrite it in rust :3c (please don't do this)

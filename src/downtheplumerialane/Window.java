@@ -2,7 +2,6 @@ package downtheplumerialane;
 
 import java.awt.*;
 import java.io.*;
-import java.util.*;
 import javax.swing.*;
 
 public class Window extends JFrame {
@@ -20,8 +19,9 @@ public class Window extends JFrame {
 		super("Down The Plumeria Lane");
 		setLayout(new CardLayout());
 
-		add(new TitleScreen(this), "Title Screen");
-		add(new SettingsScreen(this), "Settings Screen");
+		add(new TitleInterface(this), "title");
+		add(new SettingsInterface(this), "settings");
+		add(new CharacterNamingInterface(this), "namechar");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
@@ -30,8 +30,9 @@ public class Window extends JFrame {
 		setVisible(true);
 	}
 
-	public static void loadFonts(JPanel s, GraphicsEnvironment ge, String[] fs) {
+	public static void loadFonts(JPanel s, String[] fs) {
 		try {
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			for (String f : fs) ge.registerFont(
 				Font.createFont(
 					Font.TRUETYPE_FONT,
@@ -48,7 +49,17 @@ public class Window extends JFrame {
 		}
 	}
 
-	public void switchToScreen(String s) {
+	public static ImageIcon createScaledImageIcon(String f, int r) {
+		return new ImageIcon(
+			new ImageIcon(
+				Window.class.getClassLoader().getResource("resources/images/" + f)
+			)
+				.getImage()
+				.getScaledInstance(r, -1, Image.SCALE_SMOOTH)
+		);
+	}
+
+	public void switchInterface(String s) {
 		CardLayout layout = (CardLayout) getContentPane().getLayout();
 		layout.show(getContentPane(), s);
 	}
