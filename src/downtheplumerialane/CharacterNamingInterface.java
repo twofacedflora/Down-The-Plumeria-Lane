@@ -31,7 +31,7 @@ public class CharacterNamingInterface extends PanelWithBackground {
 
 	public CharacterNamingInterface(Window w) {
 		super("background/void.png");
-		Window.loadFonts(this, Window.CUSTOM_FONTS);
+		Window.loadFonts(this);
 
 		createAndShowGUI();
 

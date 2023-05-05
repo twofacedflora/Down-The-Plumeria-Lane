@@ -1,6 +1,12 @@
 package downtheplumerialane;
 
+import javax.swing.*;
+
 public class Player {
+
+	private static final String defaultName = "FRAN";
+
+	private static String currentAnimationFrame = "fran_front_1.png";
 
 	// The Player's Name
 	private static String playerName = "______";
@@ -55,5 +61,9 @@ public class Player {
 			}
 		}
 		return 6;
+	}
+
+	public static String getCurrentAnimationFrame() {
+		return "resources/images/sprites/fran/" + currentAnimationFrame;
 	}
 }

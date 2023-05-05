@@ -22,18 +22,20 @@ public class Window extends JFrame {
 		add(new TitleInterface(this), "title");
 		add(new SettingsInterface(this), "settings");
 		add(new CharacterNamingInterface(this), "namechar");
+		add(new InGameInterface(this), "ingame");
 
+		getContentPane().setPreferredSize(new Dimension(900, 600));
+		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(WIDTH, HEIGHT);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
 	}
 
-	public static void loadFonts(JPanel s, String[] fs) {
+	public static void loadFonts(JPanel s) {
 		try {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			for (String f : fs) ge.registerFont(
+			for (String f : CUSTOM_FONTS) ge.registerFont(
 				Font.createFont(
 					Font.TRUETYPE_FONT,
 					new BufferedInputStream(

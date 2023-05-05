@@ -9,7 +9,7 @@ Builds are usually [published](https://github.com/twofacedflora/Down-The-Plumeri
 3. Open the project folder in a terminal and run `./build.sh`.
 4. The compiled project should appear in `output`.
 
-### Troubleshooting
+## Troubleshooting
 
 **Java Application Launch Failed**
 

@@ -88,7 +88,7 @@ public class CharacterNamingInterfaceController {
 					// Auto-Set
 					case 27:
 						Player.setName();
-						topText.setText("Here's a name for you.");
+						window.switchInterface("ingame");
 						break;
 					// Confirm
 					case 28:
@@ -100,7 +100,9 @@ public class CharacterNamingInterfaceController {
 									String.valueOf(name.charAt(p)).toLowerCase() +
 									name.substring(p + 1, name.length());
 							}
-							topText.setText("Greetings, " + name + ".");
+							window.switchInterface("ingame");
+						} else {
+							topText.setText("Please enter a name.");
 						}
 						break;
 					// Return to Keyboard

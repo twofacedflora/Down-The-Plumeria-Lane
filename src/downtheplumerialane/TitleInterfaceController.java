@@ -1,9 +1,6 @@
-// TODO: make json file updating less hack-like
-
 package downtheplumerialane;
 
 import java.awt.event.*;
-import java.io.*;
 import java.util.*;
 import javax.swing.*;
 

@@ -11,7 +11,7 @@ public class SettingsInterface extends PanelWithBackground {
 
 	public SettingsInterface(Window w) {
 		super("background/void.png");
-		Window.loadFonts(this, Window.CUSTOM_FONTS);
+		Window.loadFonts(this);
 		Setting.setOutputFile();
 		Setting.initializeJson();
 

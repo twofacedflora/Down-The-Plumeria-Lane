@@ -19,8 +19,7 @@ public class TitleInterface extends PanelWithBackground {
 
 	public TitleInterface(Window w) {
 		super("background/title_normal.png");
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Window.loadFonts(this, Window.CUSTOM_FONTS);
+		Window.loadFonts(this);
 
 		setLayout(new BorderLayout());
 
