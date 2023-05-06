@@ -2,7 +2,7 @@
 
 ## Building
 
-Builds are usually [published](https://github.com/twofacedflora/Down-The-Plumeria-Lane/releases) with every commit. If you'd like to compile the project yourself, try the following steps:
+Builds have been stalled since commit [`1a1e06e`](https://github.com/twofacedflora/Down-The-Plumeria-Lane/tree/1a1e06eb31e26b47237644f4975267a015dd7479) due to an issue with nested dependencies. You can access the last functioning build [here](https://github.com/twofacedflora/Down-The-Plumeria-Lane/releases/tag/v0.1.0-alpha). If you'd like to compile the project yourself, try the following steps:
 
 1. Ensure you have the latest Java version installed. You can download the latest release from [Oracle](https://www.oracle.com/java/technologies/downloads/). OpenJDK builds such as [Liberica JDK](https://bell-sw.com/pages/downloads/) should work fine.
 2. [Download](https://github.com/Anuken/Mindustry/archive/refs/heads/master.zip) the repository.
@@ -30,11 +30,3 @@ Not so much a problem, but if you want the program to run even after closing the
 **Didn't help?**
 
 If you're experiencing a problem that isn't documented in this section, [open an issue](https://github.com/twofacedflora/Down-The-Plumeria-Lane/issues/new) about it.
-
-## TODO ドンマイ
-
-- [x] IDK WHERE THE DS_STORE FILES ARE COMING FROM BUT REMOVE THEM!!
-- [ ] teach chippy how to set up a remote repo and make a PR
-- [ ] clean up the codebase for the nth time
-- [ ] set up discord webhook action for ease of mind
-- [ ] rewrite it in rust :3c (please don't do this)
