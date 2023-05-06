@@ -1,0 +1,37 @@
+- name: Actions Status Discord
+  # You may pin to the exact commit or the version.
+  # uses: sarisia/actions-status-discord@82409b24a08684f54ea5baa6b376e36dad37fb81
+  uses: sarisia/actions-status-discord@v1.12.0
+  with:
+    # Discord webhook endpoint. If not set, env.DISCORD_WEBHOOK will be used.
+    webhook: ${{ secrets.DISCORD_ACTIONS_WEBHOOK }}
+    # Job status. Should be bound to job.status. Default to success.
+    status: # optional, default is ${{ job.status }}
+    # Deprecated. Job name included in message title. Same as title input.
+    job: # optional
+    # Content. Shown as an message outside of the embed. See [Mention to user/role](#mention-to-user-role)
+    content: "New changes have been made to the repository."
+    # String included in embed title. Overrides job input.
+    title: "Github Actions CI"
+    # Description included in message
+    description: # optional
+    # Image attached to the message
+    image: # optional
+    # Overrides Discord embed color
+    color: 0xfdfd96
+    # URL to jump when the title is clicked
+    url: # optional
+    # Overrides Discord webhook username
+    username: Fran
+    # Overrides Discord webhook avatar url
+    avatar_url: ${{ secrets.DISCORD_ACTIONS_AVATAR_URL }}
+    # This action won't make workflow failed by default.
+    nofail: # optional, default is true
+    # Suppress GitHub context fields
+    nocontext: # optional, default is false
+    # Avoid appending job status to title
+    noprefix: true
+    # Suppress detailed embed fields
+    nodetail: # optional, default is false
+    # Avoid appending timestamp
+    notimestamp: # optional, default is false
