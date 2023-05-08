@@ -14,24 +14,29 @@ public class Tile {
 
 	public static final int TILE_WIDTH = 60;
 
-	private static HashMap<Integer, String> tileMap = new HashMap<>();
+	private static HashMap<Integer, Tile> tileMap = new HashMap<>();
 
-	private String name;
+	private String name, filename;
 
 	private Type type;
 
 	public Tile(String n, Type t, int id, String f) {
 		name = n;
+		filename = f;
 		type = t;
-		tileMap.put(id, f);
+		tileMap.put(id, this);
 	}
 
-	public static HashMap<Integer, String> getTiles() {
+	public static HashMap<Integer, Tile> getTiles() {
 		return tileMap;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String getFilename() {
+		return filename;
 	}
 
 	public Type getType() {

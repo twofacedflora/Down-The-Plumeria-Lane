@@ -65,10 +65,11 @@ public class InGameInterface extends JPanel {
 		);
 		Tile tile1 = new Tile("Tile1", Tile.Type.PASSABLE, 12, "tile_1.png");
 
-		Map testMap1 = new Map("testmap_1.txt");
 		Map testMap2 = new Map("testmap_2.txt");
+		testMap2.addExit(8, 7);
 
 		setActiveMap(testMap2.getContainer());
+		activeMap.goToExit(0);
 
 		player =
 			new JLabel(

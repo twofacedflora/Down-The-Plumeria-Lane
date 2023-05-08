@@ -1,10 +1,8 @@
 package downtheplumerialane;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
+import java.util.*;
 import javax.swing.*;
 
 public class MapContainer extends JPanel {
@@ -12,9 +10,12 @@ public class MapContainer extends JPanel {
 	private int dx1, dy1, dx2, dy2;
 	private int srcx1, srcy1, srcx2, srcy2;
 
+	private ArrayList<int[]> exits;
+
 	private BufferedImage mapImage;
 
 	public MapContainer(Map m) {
+		exits = m.getExits();
 		mapImage = m.getMap();
 		dx1 = 0;
 		dy1 = 0;
@@ -52,6 +53,14 @@ public class MapContainer extends JPanel {
 			srcx1 += Tile.TILE_WIDTH;
 			srcx2 += Tile.TILE_WIDTH;
 		}
+	}
+
+	public void goToExit(int i) {
+		int[] exit = exits.get(i);
+		srcx1 = Tile.TILE_WIDTH * exit[0];
+		srcy1 = Tile.TILE_WIDTH * exit[1];
+		srcx2 = Tile.TILE_WIDTH * exit[0] + Window.WIDTH;
+		srcy2 = Tile.TILE_WIDTH * exit[1] + Window.HEIGHT;
 	}
 
 	@Override

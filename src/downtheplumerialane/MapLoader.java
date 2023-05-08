@@ -8,6 +8,13 @@ import javax.imageio.*;
 
 class MapLoader {
 
+	public static final int PLAYER_X = Tile.TILE_WIDTH * 7;
+	public static final int PLAYER_Y = Tile.TILE_WIDTH * 4;
+	public static final int N_PAD = Tile.TILE_WIDTH * 4;
+	public static final int S_PAD = Tile.TILE_WIDTH * 4 + Tile.TILE_WIDTH / 2;
+	public static final int W_PAD = Tile.TILE_WIDTH * 7;
+	public static final int E_PAD = Tile.TILE_WIDTH * 7;
+
 	public static int getMapWidth(String f) {
 		int width = 0;
 
@@ -52,11 +59,9 @@ class MapLoader {
 		return height;
 	}
 
-	public static BufferedImage loadMap(String f) {
-		int width = getMapWidth(f);
-		int height = getMapHeight(f);
-
-		ArrayList<Integer> tileIDs = new ArrayList<Integer>();
+	public static int[][] getTileIDs(String f, int w, int h) {
+		int[][] tileIDs = new int[h][w];
+		ArrayList<Integer> entryList = new ArrayList<>();
 
 		try {
 			Scanner scanner = new Scanner(new File("resources/mapdata/" + f));
@@ -73,7 +78,7 @@ class MapLoader {
 						.mapToInt(Integer::parseInt)
 						.toArray();
 					for (int i : entries) {
-						tileIDs.add(i);
+						entryList.add(i);
 					}
 				}
 			}
@@ -83,29 +88,39 @@ class MapLoader {
 			e.printStackTrace();
 		}
 
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
+				tileIDs[i][j] = entryList.get(w * i + j);
+			}
+		}
+
+		return tileIDs;
+	}
+
+	public static BufferedImage loadMap(String f, int[][] t, int w, int h) {
 		BufferedImage map = new BufferedImage(
-			width * Tile.TILE_WIDTH + 840,
-			height * Tile.TILE_WIDTH + 540,
+			w * Tile.TILE_WIDTH + (W_PAD + E_PAD),
+			h * Tile.TILE_WIDTH + (N_PAD + S_PAD),
 			BufferedImage.TYPE_INT_ARGB
 		);
 		Graphics mapGraphics = map.createGraphics();
 
 		mapGraphics.setColor(Color.BLACK);
 
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < w; j++) {
 				try {
 					Image tile = ImageIO.read(
 						MapLoader.class.getClassLoader()
 							.getResourceAsStream(
 								"resources/images/sprites/env/" +
-								Tile.getTiles().get(tileIDs.get(width * i + j))
+								Tile.getTiles().get(t[i][j]).getFilename()
 							)
 					);
 					mapGraphics.drawImage(
 						tile,
-						(j * Tile.TILE_WIDTH) + (Tile.TILE_WIDTH * 7),
-						(i * Tile.TILE_WIDTH) + (Tile.TILE_WIDTH * 4),
+						(j * Tile.TILE_WIDTH) + PLAYER_X,
+						(i * Tile.TILE_WIDTH) + PLAYER_Y,
 						null
 					);
 				} catch (IOException e) {
