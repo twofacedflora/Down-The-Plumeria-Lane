@@ -5,7 +5,7 @@
 Builds have been stalled since commit [`1a1e06e`](https://github.com/twofacedflora/Down-The-Plumeria-Lane/tree/1a1e06eb31e26b47237644f4975267a015dd7479) due to an issue with nested dependencies. You can access the last functioning build [here](https://github.com/twofacedflora/Down-The-Plumeria-Lane/releases/tag/v0.1.0-alpha). If you'd like to compile the project yourself, try the following steps:
 
 1. Ensure you have the latest Java version installed. You can download the latest release from [Oracle](https://www.oracle.com/java/technologies/downloads/). OpenJDK builds such as [Liberica JDK](https://bell-sw.com/pages/downloads/) should work fine.
-2. [Download](https://github.com/Anuken/Mindustry/archive/refs/heads/master.zip) the repository.
+2. [Download](https://github.com/twofacedflora/Down-The-Plumeria-Lane/archive/refs/heads/master.zip) the repository.
 3. Open the project folder in a terminal and run `./build.sh`.
 4. The compiled project should appear in `output`.
 
