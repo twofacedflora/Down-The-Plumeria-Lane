@@ -46,6 +46,10 @@ public class Map {
 		return exits;
 	}
 
+	public int[][] getTileIDs() {
+		return tileIDs;
+	}
+
 	public static ArrayList<Map> getMaps() {
 		return mapList;
 	}
