@@ -26,9 +26,6 @@ public class ActiveKeyConfigListener extends KeyAdapter {
 			case "⏎":
 				keyText = "ENTER";
 				break;
-			case "⇧":
-				keyText = "SHIFT";
-				break;
 			case "⌫":
 				keyText = "BACK_SPACE";
 				break;
@@ -47,14 +44,17 @@ public class ActiveKeyConfigListener extends KeyAdapter {
 			case "→":
 				keyText = "RIGHT";
 				break;
+			case "⇧":
+				invalid = true;
+				break;
 			case "⌃":
-				keyText = "CONTROL";
+				invalid = true;
 				break;
 			case "⌥":
-				keyText = "ALT";
+				invalid = true;
 				break;
 			case "⌘":
-				keyText = "META";
+				invalid = true;
 				break;
 			case "Unknown keyCode: 0x0":
 				invalid = true;
