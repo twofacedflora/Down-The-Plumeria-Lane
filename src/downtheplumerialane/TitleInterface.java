@@ -69,7 +69,6 @@ public class TitleInterface extends PanelWithBackground {
 		add(southContainer, BorderLayout.SOUTH);
 
 		controller = new TitleInterfaceController(w, this, options);
-		controller.setKeybinds();
 		for (int i = 0; i < options.size(); i++) controller.resetOptionState(i);
 		controller.setSelector(0);
 	}

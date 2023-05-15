@@ -1,5 +1,4 @@
 #!/bin/bash
-# FIXME
 
 rm -rv output/.data
 mkdir -v output/.data

@@ -36,7 +36,6 @@ public class CharacterNamingInterface extends PanelWithBackground {
 		createAndShowGUI();
 
 		controller = new CharacterNamingInterfaceController(w, this);
-		controller.setKeybinds();
 	}
 
 	private void createAndShowGUI() {

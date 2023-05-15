@@ -45,7 +45,11 @@ public class SettingsMenu extends JPanel {
 	}
 
 	public void moveSelectorDown() {
-		if (!locked && !(selectorPosition % 4 == 3)) {
+		if (
+			!locked &&
+			!(selectorPosition % 4 == 3) &&
+			(group.getSettings().size() > selectorPosition + 1)
+		) {
 			removeSelectedState();
 			selectorPosition++;
 			selectedSetting =
@@ -64,19 +68,26 @@ public class SettingsMenu extends JPanel {
 				setSelectedState();
 			}
 		} else {
-			((Setting.Scale) selectedSetting.getSetting()).decrementValue();
-			((Setting.Scale) selectedSetting.getSetting()).updateJson();
-			(
-				(SettingContainer.ArrowControls) (selectedSetting.controlField)
-			).value.setText(
-					Integer.toString(((Setting.Scale) selectedSetting.getSetting()).value)
-				);
+			if (selectedSetting.getSetting() instanceof Setting.Scale) {
+				((Setting.Scale) selectedSetting.getSetting()).decrementValue();
+				((Setting.Scale) selectedSetting.getSetting()).updateJson();
+				(
+					(SettingContainer.ArrowControls) (selectedSetting.controlField)
+				).value.setText(
+						Integer.toString(
+							((Setting.Scale) selectedSetting.getSetting()).getValue()
+						)
+					);
+			}
 		}
 	}
 
 	public void moveSelectorRight() {
 		if (!locked) {
-			if (selectorPosition < 4) {
+			if (
+				selectorPosition < 4 &&
+				(group.getSettings().size() >= selectorPosition + 5)
+			) {
 				removeSelectedState();
 				selectorPosition += 4;
 				selectedSetting =
@@ -84,13 +95,17 @@ public class SettingsMenu extends JPanel {
 				setSelectedState();
 			}
 		} else {
-			((Setting.Scale) selectedSetting.getSetting()).incrementValue();
-			((Setting.Scale) selectedSetting.getSetting()).updateJson();
-			(
-				(SettingContainer.ArrowControls) (selectedSetting.controlField)
-			).value.setText(
-					Integer.toString(((Setting.Scale) selectedSetting.getSetting()).value)
-				);
+			if (selectedSetting.getSetting() instanceof Setting.Scale) {
+				((Setting.Scale) selectedSetting.getSetting()).incrementValue();
+				((Setting.Scale) selectedSetting.getSetting()).updateJson();
+				(
+					(SettingContainer.ArrowControls) (selectedSetting.controlField)
+				).value.setText(
+						Integer.toString(
+							((Setting.Scale) selectedSetting.getSetting()).getValue()
+						)
+					);
+			}
 		}
 	}
 

@@ -1,6 +1,3 @@
-// TODO: Implement JSON parsing for fetching and writing data to settings.json
-// TODO: IMPLEMENT DYNAMIC KEYBINDS.
-
 package downtheplumerialane;
 
 import java.awt.event.*;
@@ -9,89 +6,117 @@ import javax.swing.*;
 public class SettingsInterfaceController {
 
 	private Window window;
+	private KeyMap keyMap;
 	private SettingsInterface settingsInterface;
 	private SettingsMenu activeMenu;
 
-	public SettingsInterfaceController(Window w, SettingsInterface s) {
+	public SettingsInterfaceController(Window w, SettingsInterface itf) {
 		window = w;
-		settingsInterface = s;
-		activeMenu = settingsInterface.getActiveMenu();
+		settingsInterface = itf;
+		activeMenu = itf.getActiveMenu();
+		keyMap = new KeyMap(itf);
+		keyMap.mapAction(KeyMap.Command.UP, upAction);
+		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
+		keyMap.mapAction(KeyMap.Command.LEFT, leftAction);
+		keyMap.mapAction(KeyMap.Command.RIGHT, rightAction);
+		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
+		keyMap.mapAction(KeyMap.Command.BACK, backAction);
 	}
 
 	Action upAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			activeMenu.verifyLock();
-			activeMenu.moveSelectorUp();
+			if (KeyMap.getUpdated()) {
+				KeyMap.setUpdated(false);
+			} else {
+				activeMenu.verifyLock();
+				activeMenu.moveSelectorUp();
+			}
 		}
 	};
 
 	Action downAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			activeMenu.verifyLock();
-			activeMenu.moveSelectorDown();
+			if (KeyMap.getUpdated()) {
+				KeyMap.setUpdated(false);
+			} else {
+				activeMenu.verifyLock();
+				activeMenu.moveSelectorDown();
+			}
 		}
 	};
 
 	Action leftAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			activeMenu.verifyLock();
-			activeMenu.moveSelectorLeft();
+			if (KeyMap.getUpdated()) {
+				KeyMap.setUpdated(false);
+			} else {
+				activeMenu.verifyLock();
+				activeMenu.moveSelectorLeft();
+			}
 		}
 	};
 
 	Action rightAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			activeMenu.verifyLock();
-			activeMenu.moveSelectorRight();
+			if (KeyMap.getUpdated()) {
+				KeyMap.setUpdated(false);
+			} else {
+				activeMenu.verifyLock();
+				activeMenu.moveSelectorRight();
+			}
 		}
 	};
 
 	Action confirmAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			if (
-				(
-					activeMenu.selectedSetting.getSetting() instanceof Setting.Scale ||
-					activeMenu.selectedSetting.getSetting() instanceof Setting.Key
-				) &&
-				!(activeMenu.selectedSetting.getActive())
-			) {
-				activeMenu.selectedSetting.toggleActive();
-			} else if (
-				activeMenu.selectedSetting.getSetting() instanceof Setting.Combo
-			) {
-				(
-					(Setting.Combo) activeMenu.selectedSetting.getSetting()
-				).setNextValue();
-				((Setting.Combo) activeMenu.selectedSetting.getSetting()).updateJson();
-				(
-					(SettingContainer.PressControls) (
-						activeMenu.selectedSetting.getSetting().getContainer().controlField
+			Setting setting = settingsInterface
+				.getActiveMenu()
+				.selectedSetting.getSetting();
+			SettingContainer container = activeMenu.selectedSetting;
+
+			if (KeyMap.getUpdated()) {
+				KeyMap.setUpdated(false);
+			} else if (setting instanceof Setting.Scale && !(container.getActive())) {
+				container.toggleActive();
+			} else if (setting instanceof Setting.Key && !(container.getActive())) {
+				container.toggleActive();
+				window.addKeyListener(
+					new ActiveKeyConfigListener(
+						window,
+						activeMenu,
+						activeMenu.selectorPosition,
+						setting
 					)
-				).value.setText(
-						((Setting.Combo) activeMenu.selectedSetting.getSetting()).value
-					);
-			} else if (
-				(activeMenu.selectedSetting.getSetting() instanceof Setting.SubMenu) &&
-				((Setting.SubMenu) activeMenu.selectedSetting.getSetting()).submenu ==
-				"keyconf"
-			) {
-				JOptionPane.showMessageDialog(
-					window,
-					"The developer was too lazy to implement dynamic keybinds, so they disabled the key config menu.",
-					"Feature Unavailable",
-					JOptionPane.INFORMATION_MESSAGE
 				);
+			} else if (setting instanceof Setting.Combo) {
+				((Setting.Combo) setting).setNextValue();
+				((Setting.Combo) setting).updateJson();
+				(
+					(SettingContainer.PressControls) (setting.getContainer().controlField)
+				).setValue(((Setting.Combo) setting).getValue());
+			} else if (
+				(setting instanceof Setting.SubMenu) &&
+				((Setting.SubMenu) setting).submenu == "keyconf"
+			) {
+				settingsInterface.setActiveMenu(SettingGroup.getSettingGroups().get(1));
+				activeMenu = SettingGroup.getSettingGroups().get(1).getMenu();
 			}
 		}
 	};
 
 	Action backAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			if (
-				(activeMenu.selectedSetting.getSetting() instanceof Setting.Scale) &&
-				activeMenu.selectedSetting.getActive()
-			) {
-				activeMenu.selectedSetting.toggleActive();
+			Setting setting = settingsInterface
+				.getActiveMenu()
+				.selectedSetting.getSetting();
+			SettingContainer container = activeMenu.selectedSetting;
+
+			if (KeyMap.getUpdated()) {
+				KeyMap.setUpdated(false);
+			} else if ((setting instanceof Setting.Scale) && container.getActive()) {
+				container.toggleActive();
+			} else if ((setting instanceof Setting.Key) && container.getActive()) {
+				// disable key binding
 			} else if (
 				activeMenu == SettingGroup.getSettingGroups().get(0).getMenu()
 			) {
@@ -99,36 +124,9 @@ public class SettingsInterfaceController {
 				activeMenu.reset();
 				window.switchInterface("title");
 			} else {
-				settingsInterface.switchMenu(SettingGroup.getSettingGroups().get(0));
+				settingsInterface.setActiveMenu(SettingGroup.getSettingGroups().get(0));
+				activeMenu = SettingGroup.getSettingGroups().get(0).getMenu();
 			}
 		}
 	};
-
-	public void setKeybinds() {
-		settingsInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("UP"), "up");
-		settingsInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("DOWN"), "down");
-		settingsInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("LEFT"), "left");
-		settingsInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("RIGHT"), "right");
-		settingsInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("C"), "confirm");
-		settingsInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("X"), "back");
-
-		settingsInterface.getActionMap().put("up", upAction);
-		settingsInterface.getActionMap().put("down", downAction);
-		settingsInterface.getActionMap().put("left", leftAction);
-		settingsInterface.getActionMap().put("right", rightAction);
-		settingsInterface.getActionMap().put("confirm", confirmAction);
-		settingsInterface.getActionMap().put("back", backAction);
-	}
 }

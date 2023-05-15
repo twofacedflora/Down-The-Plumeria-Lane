@@ -19,10 +19,12 @@ public class Window extends JFrame {
 		super("Down The Plumeria Lane");
 		setLayout(new CardLayout());
 
-		add(new TitleInterface(this), "title");
 		add(new SettingsInterface(this), "settings");
+		add(new TitleInterface(this), "title");
 		add(new CharacterNamingInterface(this), "namechar");
 		add(new InGameInterface(this), "ingame");
+
+		switchInterface("title");
 
 		getContentPane().setPreferredSize(new Dimension(900, 600));
 		pack();

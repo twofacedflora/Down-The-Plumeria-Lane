@@ -87,14 +87,13 @@ public class SettingsInterface extends PanelWithBackground {
 		activeMenu = main.getMenu();
 
 		controller = new SettingsInterfaceController(w, this);
-		controller.setKeybinds();
 	}
 
 	public SettingsMenu getActiveMenu() {
 		return activeMenu;
 	}
 
-	public void switchMenu(SettingGroup g) {
+	public void setActiveMenu(SettingGroup g) {
 		CardLayout layout = (CardLayout) menuPanel.getLayout();
 		layout.show(menuPanel, g.name);
 		activeMenu = g.getMenu();

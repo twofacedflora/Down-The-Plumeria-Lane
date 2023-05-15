@@ -9,26 +9,34 @@ public class CharacterNamingInterfaceController {
 	private int buttonHover;
 
 	private Window window;
+	private KeyMap keyMap;
 	private CharacterNamingInterface characterNamingInterface;
 	private JLayeredPane keySet;
 	private JLabel hlBox, verBox, horBox, topText, nameText, unsure, confirm, upButton;
 
 	public CharacterNamingInterfaceController(
 		Window w,
-		CharacterNamingInterface c
+		CharacterNamingInterface itf
 	) {
 		window = w;
-		characterNamingInterface = c;
-		keySet = c.keySet;
-		buttonHover = c.buttonHover;
-		hlBox = c.hlBox;
-		verBox = c.verBox;
-		horBox = c.horBox;
-		topText = c.topText;
-		nameText = c.nameText;
-		unsure = c.unsure;
-		confirm = c.confirm;
-		upButton = c.upButton;
+		characterNamingInterface = itf;
+		keySet = itf.keySet;
+		buttonHover = itf.buttonHover;
+		hlBox = itf.hlBox;
+		verBox = itf.verBox;
+		horBox = itf.horBox;
+		topText = itf.topText;
+		nameText = itf.nameText;
+		unsure = itf.unsure;
+		confirm = itf.confirm;
+		upButton = itf.upButton;
+		keyMap = new KeyMap(itf);
+		keyMap.mapAction(KeyMap.Command.UP, upAction);
+		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
+		keyMap.mapAction(KeyMap.Command.LEFT, leftAction);
+		keyMap.mapAction(KeyMap.Command.RIGHT, rightAction);
+		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
+		keyMap.mapAction(KeyMap.Command.BACK, backAction);
 	}
 
 	Action upAction = new AbstractAction() {
@@ -146,33 +154,5 @@ public class CharacterNamingInterfaceController {
 		if (buttonHover == 29) upButton.setBorder(
 			BorderFactory.createLineBorder(Color.white, 3)
 		); else upButton.setBorder(null);
-	}
-
-	public void setKeybinds() {
-		characterNamingInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("UP"), "up");
-		characterNamingInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("DOWN"), "down");
-		characterNamingInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("LEFT"), "left");
-		characterNamingInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("RIGHT"), "right");
-		characterNamingInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("C"), "confirm");
-		characterNamingInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("X"), "back");
-
-		characterNamingInterface.getActionMap().put("up", upAction);
-		characterNamingInterface.getActionMap().put("down", downAction);
-		characterNamingInterface.getActionMap().put("left", leftAction);
-		characterNamingInterface.getActionMap().put("right", rightAction);
-		characterNamingInterface.getActionMap().put("confirm", confirmAction);
-		characterNamingInterface.getActionMap().put("back", backAction);
 	}
 }

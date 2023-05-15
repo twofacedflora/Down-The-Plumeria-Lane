@@ -1,18 +1,27 @@
 package downtheplumerialane;
 
 import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 
 public class InGameInterfaceController {
 
 	private Window window;
+	private KeyMap keyMap;
 	private InGameInterface inGameInterface;
 	private MapContainer mapContainer;
 
-	public InGameInterfaceController(Window w, InGameInterface i) {
+	public InGameInterfaceController(Window w, InGameInterface itf) {
 		window = w;
-		inGameInterface = i;
-		mapContainer = i.getActiveMap();
+		inGameInterface = itf;
+		mapContainer = itf.getActiveMap();
+		keyMap = new KeyMap(itf);
+		keyMap.mapAction(KeyMap.Command.UP, upAction);
+		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
+		keyMap.mapAction(KeyMap.Command.LEFT, leftAction);
+		keyMap.mapAction(KeyMap.Command.RIGHT, rightAction);
+		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
+		keyMap.mapAction(KeyMap.Command.BACK, backAction);
 	}
 
 	Action upAction = new AbstractAction() {
@@ -52,32 +61,4 @@ public class InGameInterfaceController {
 			window.switchInterface("title");
 		}
 	};
-
-	public void setKeybinds() {
-		inGameInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("UP"), "up");
-		inGameInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("DOWN"), "down");
-		inGameInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("LEFT"), "left");
-		inGameInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("RIGHT"), "right");
-		inGameInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("C"), "confirm");
-		inGameInterface
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("X"), "back");
-
-		inGameInterface.getActionMap().put("up", upAction);
-		inGameInterface.getActionMap().put("down", downAction);
-		inGameInterface.getActionMap().put("left", leftAction);
-		inGameInterface.getActionMap().put("right", rightAction);
-		inGameInterface.getActionMap().put("confirm", confirmAction);
-		inGameInterface.getActionMap().put("back", backAction);
-	}
 }

@@ -9,17 +9,23 @@ public class TitleInterfaceController {
 	private static int selectedOption = 0;
 
 	private Window window;
+	private KeyMap keyMap;
 	private TitleInterface titleScreen;
+
 	private ArrayList<JLabel> options;
 
 	public TitleInterfaceController(
 		Window w,
-		TitleInterface t,
+		TitleInterface itf,
 		ArrayList<JLabel> o
 	) {
 		window = w;
-		titleScreen = t;
+		titleScreen = itf;
 		options = o;
+		keyMap = new KeyMap(itf);
+		keyMap.mapAction(KeyMap.Command.UP, upAction);
+		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
+		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
 	}
 
 	public void setSelector(int i) {
@@ -77,20 +83,4 @@ public class TitleInterfaceController {
 			}
 		}
 	};
-
-	public void setKeybinds() {
-		titleScreen
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("UP"), "up");
-		titleScreen
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("DOWN"), "down");
-		titleScreen
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(KeyStroke.getKeyStroke("C"), "confirm");
-
-		titleScreen.getActionMap().put("up", upAction);
-		titleScreen.getActionMap().put("down", downAction);
-		titleScreen.getActionMap().put("confirm", confirmAction);
-	}
 }

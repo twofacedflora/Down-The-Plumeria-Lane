@@ -1,7 +1,5 @@
 package downtheplumerialane;
 
-import javax.swing.*;
-
 public class Player {
 
 	private static final String defaultName = "FRAN";

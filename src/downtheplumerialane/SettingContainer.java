@@ -30,13 +30,13 @@ public class SettingContainer extends JPanel {
 
 		switch (s.getClass().toString()) {
 			case "class downtheplumerialane.Setting$Scale":
-				controlField = new ArrowControls(((Setting.Scale) s).value);
+				controlField = new ArrowControls(((Setting.Scale) s).getValue());
 				break;
 			case "class downtheplumerialane.Setting$Combo":
-				controlField = new PressControls(((Setting.Combo) s).value);
+				controlField = new PressControls(((Setting.Combo) s).getValue());
 				break;
 			case "class downtheplumerialane.Setting$Key":
-				controlField = new PressControls(((Setting.Key) s).value);
+				controlField = new PressControls(((Setting.Key) s).getValue());
 				break;
 			default:
 				controlField = new JPanel();
@@ -78,8 +78,10 @@ public class SettingContainer extends JPanel {
 
 		if (setting instanceof Setting.Key) {
 			if (!active) {
+				active = true;
+				((PressControls) controlField).promptValue();
+			} else {
 				active = false;
-				((Setting.Key) setting).promptValue();
 			}
 		}
 	}
@@ -199,7 +201,7 @@ public class SettingContainer extends JPanel {
 
 	public class PressControls extends JPanel {
 
-		protected JLabel value;
+		private JLabel value;
 
 		public PressControls(String v) {
 			setLayout(new GridLayout(1, 1));
@@ -211,6 +213,14 @@ public class SettingContainer extends JPanel {
 			value.setForeground(Color.WHITE);
 
 			add(value);
+		}
+
+		public void setValue(String s) {
+			value.setText(s);
+		}
+
+		public void promptValue() {
+			value.setText("press any key");
 		}
 
 		public void invertColor() {

@@ -88,8 +88,6 @@ public class InGameInterface extends JPanel {
 		add(activeMap);
 
 		controller = new InGameInterfaceController(w, this);
-
-		controller.setKeybinds();
 	}
 
 	public MapContainer getActiveMap() {

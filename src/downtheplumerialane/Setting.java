@@ -77,7 +77,7 @@ public class Setting {
 
 	public static class Scale extends Setting {
 
-		protected int value;
+		private int value;
 		private int lowerLimit, upperLimit;
 		private String jsonKey;
 
@@ -90,12 +90,20 @@ public class Setting {
 			super.container = new SettingContainer(this);
 		}
 
+		public int getValue() {
+			return value;
+		}
+
 		public void incrementValue() {
-			if (value < upperLimit) value++;
+			if (value < upperLimit) {
+				value++;
+			}
 		}
 
 		public void decrementValue() {
-			if (value > lowerLimit) value--;
+			if (value > lowerLimit) {
+				value--;
+			}
 		}
 
 		public void updateJson() {
@@ -106,7 +114,7 @@ public class Setting {
 
 	public static class Combo extends Setting {
 
-		protected String value;
+		private String value;
 		private int index;
 		private String jsonKey;
 		private String[] choiceList;
@@ -118,6 +126,10 @@ public class Setting {
 			value = c[index];
 			choiceList = c;
 			super.container = new SettingContainer(this);
+		}
+
+		public String getValue() {
+			return value;
 		}
 
 		public void setNextValue() {
@@ -137,7 +149,7 @@ public class Setting {
 
 	public static class Key extends Setting {
 
-		protected String value;
+		private String value;
 		private String jsonKey;
 
 		public Key(String n, String k) {
@@ -147,13 +159,17 @@ public class Setting {
 			super.container = new SettingContainer(this);
 		}
 
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String s) {
+			value = s;
+		}
+
 		public void updateJson() {
 			jsonObject.remove(jsonKey);
 			jsonObject.put(jsonKey, value);
-		}
-
-		public void promptValue() {
-			value = "Press any key...";
 		}
 	}
 
