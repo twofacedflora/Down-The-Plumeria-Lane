@@ -12,16 +12,24 @@ public class TitleInterface extends PanelWithBackground {
 		"Quit",
 	};
 
+	private int selectorPosition = 0;
+
 	private TitleInterfaceController controller;
+	private ImageIcon emptyCheckbox, tickedCheckbox;
 	private JPanel centerContainer, southContainer, mainPanel, optionPanel;
 	private JLabel title, version;
-	private ArrayList<JLabel> options;
+	private ArrayList<JLabel> options = new ArrayList<>();
 
 	public TitleInterface(Window w) {
 		super("background/title_normal.png");
 		Window.loadFonts(this);
 
+		setName("title");
 		setLayout(new BorderLayout());
+
+		emptyCheckbox = Window.createScaledImageIcon("interface/checkbox.png", 40);
+		tickedCheckbox =
+			Window.createScaledImageIcon("interface/ticked_checkbox.png", 40);
 
 		title = new JLabel("Down The Plumeria Lane");
 		title.setFont(new Font("Gloria Hallelujah", Font.BOLD, 54));
@@ -34,12 +42,12 @@ public class TitleInterface extends PanelWithBackground {
 		optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
 		optionPanel.setAlignmentX(CENTER_ALIGNMENT);
 		optionPanel.setOpaque(false);
-		options = new ArrayList<JLabel>();
 
 		for (String o : optionNames) {
 			JLabel ol = new JLabel(o, SwingConstants.CENTER);
 			ol.setHorizontalTextPosition(JLabel.RIGHT);
 			ol.setFont(new Font("Gloria Hallelujah", Font.BOLD, 21));
+			ol.setIcon(emptyCheckbox);
 			options.add(ol);
 			optionPanel.add(ol);
 		}
@@ -68,8 +76,22 @@ public class TitleInterface extends PanelWithBackground {
 		add(centerContainer, BorderLayout.CENTER);
 		add(southContainer, BorderLayout.SOUTH);
 
-		controller = new TitleInterfaceController(w, this, options);
-		for (int i = 0; i < options.size(); i++) controller.resetOptionState(i);
-		controller.setSelector(0);
+		switchOption(selectorPosition);
+
+		controller = new TitleInterfaceController(w, this);
+	}
+
+	public int getSelectorPosition() {
+		return selectorPosition;
+	}
+
+	public void switchOption(int i) {
+		try {
+			options.get(selectorPosition).setIcon(emptyCheckbox);
+			selectorPosition = i;
+			options.get(selectorPosition).setIcon(tickedCheckbox);
+		} catch (NullPointerException | IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
 	}
 }

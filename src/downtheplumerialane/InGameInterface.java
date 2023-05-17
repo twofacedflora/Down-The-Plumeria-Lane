@@ -82,6 +82,7 @@ public class InGameInterface extends JPanel {
 		player.setAlignmentX(0.5f);
 		player.setAlignmentY(0.45f);
 
+		setName("ingame");
 		setLayout(new OverlayLayout(this));
 
 		add(player);

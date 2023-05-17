@@ -15,14 +15,17 @@ public class Window extends JFrame {
 		"GloriaHallelujah-Regular.ttf",
 	};
 
+	private static String prevInterface;
+
 	public Window() {
 		super("Down The Plumeria Lane");
 		setLayout(new CardLayout());
 
 		add(new SettingsInterface(this), "settings");
 		add(new TitleInterface(this), "title");
-		add(new CharacterNamingInterface(this), "namechar");
+		add(new CharacterNamingInterface(this), "characternaming");
 		add(new InGameInterface(this), "ingame");
+		add(new PausedInterface(this), "paused");
 
 		switchInterface("title");
 
@@ -63,8 +66,23 @@ public class Window extends JFrame {
 		);
 	}
 
+	public JPanel getSelectedCard() {
+		for (Component comp : this.getContentPane().getComponents()) {
+			if (comp.isVisible()) {
+				return (JPanel) comp;
+			}
+		}
+		return null;
+	}
+
 	public void switchInterface(String s) {
+		prevInterface = getSelectedCard().getName();
 		CardLayout layout = (CardLayout) getContentPane().getLayout();
 		layout.show(getContentPane(), s);
+	}
+
+	public void goToPrevInterface() {
+		CardLayout layout = (CardLayout) getContentPane().getLayout();
+		layout.show(getContentPane(), prevInterface);
 	}
 }

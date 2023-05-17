@@ -1,7 +1,6 @@
 package downtheplumerialane;
 
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 
 public class InGameInterfaceController {
@@ -58,7 +57,7 @@ public class InGameInterfaceController {
 
 	Action backAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			window.switchInterface("title");
+			window.switchInterface("paused");
 		}
 	};
 }

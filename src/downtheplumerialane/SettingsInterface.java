@@ -15,6 +15,7 @@ public class SettingsInterface extends PanelWithBackground {
 		Setting.setOutputFile();
 		Setting.initializeJson();
 
+		setName("settings");
 		setLayout(new GridBagLayout());
 
 		menuPanel = new JPanel();

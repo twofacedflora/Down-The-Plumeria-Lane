@@ -1,76 +1,50 @@
 package downtheplumerialane;
 
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 
 public class TitleInterfaceController {
 
-	private static int selectedOption = 0;
-
 	private Window window;
 	private KeyMap keyMap;
-	private TitleInterface titleScreen;
+	private TitleInterface titleInterface;
 
-	private ArrayList<JLabel> options;
-
-	public TitleInterfaceController(
-		Window w,
-		TitleInterface itf,
-		ArrayList<JLabel> o
-	) {
+	public TitleInterfaceController(Window w, TitleInterface itf) {
 		window = w;
-		titleScreen = itf;
-		options = o;
+		titleInterface = itf;
 		keyMap = new KeyMap(itf);
 		keyMap.mapAction(KeyMap.Command.UP, upAction);
 		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
 		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
 	}
 
-	public void setSelector(int i) {
-		try {
-			options
-				.get(i)
-				.setIcon(
-					Window.createScaledImageIcon("interface/ticked_checkbox.png", 40)
-				);
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void resetOptionState(int i) {
-		try {
-			options
-				.get(i)
-				.setIcon(Window.createScaledImageIcon("interface/checkbox.png", 40));
-		} catch (NullPointerException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-		}
-	}
-
 	Action upAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			resetOptionState(selectedOption);
-			if (selectedOption == 0) selectedOption = 2; else selectedOption--;
-			setSelector(selectedOption);
+			int pos = titleInterface.getSelectorPosition();
+			if (pos == 0) {
+				titleInterface.switchOption(2);
+			} else {
+				titleInterface.switchOption(pos - 1);
+			}
 		}
 	};
 
 	Action downAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			resetOptionState(selectedOption);
-			if (selectedOption == 2) selectedOption = 0; else selectedOption++;
-			setSelector(selectedOption);
+			int pos = titleInterface.getSelectorPosition();
+			if (pos == 2) {
+				titleInterface.switchOption(0);
+			} else {
+				titleInterface.switchOption(pos + 1);
+			}
 		}
 	};
 
 	Action confirmAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			switch (selectedOption) {
+			switch (titleInterface.getSelectorPosition()) {
 				case 0:
-					window.switchInterface("namechar");
+					window.switchInterface("characternaming");
 					break;
 				case 1:
 					window.switchInterface("settings");

@@ -122,7 +122,7 @@ public class SettingsInterfaceController {
 			) {
 				Setting.updateJsonFile();
 				activeMenu.reset();
-				window.switchInterface("title");
+				window.goToPrevInterface();
 			} else {
 				settingsInterface.setActiveMenu(SettingGroup.getSettingGroups().get(0));
 				activeMenu = SettingGroup.getSettingGroups().get(0).getMenu();

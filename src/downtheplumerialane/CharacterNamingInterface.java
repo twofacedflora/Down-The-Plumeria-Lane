@@ -41,6 +41,7 @@ public class CharacterNamingInterface extends PanelWithBackground {
 	private void createAndShowGUI() {
 		UIManager.put("Label.foreground", Color.white);
 
+		setName("characternaming");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		JPanel contentPanel = new JPanel();
