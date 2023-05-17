@@ -2,19 +2,18 @@
 
 package downtheplumerialane;
 
+import com.google.gson.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.*;
-import org.json.*;
 
 public class Setting {
 
 	protected static final String outputPath = ".data/settings.json";
 	protected static File outputFile;
 
-	protected static FileWriter fileWriter;
-	private static JSONTokener jsonTokener;
-	protected static JSONObject jsonObject;
+	private static FileWriter fileWriter;
+	private static JsonObject jsonObject;
 	private static ArrayList<Setting> settingList = new ArrayList<>();
 
 	protected String name;
@@ -47,11 +46,16 @@ public class Setting {
 
 	public static void initializeJson() {
 		try {
-			jsonTokener =
-				new JSONTokener(
-					new BufferedInputStream(new FileInputStream(outputFile))
-				);
-			jsonObject = new JSONObject(jsonTokener);
+			Gson gson = new Gson();
+			jsonObject =
+				gson
+					.fromJson(
+						new InputStreamReader(
+							new BufferedInputStream(new FileInputStream(outputFile))
+						),
+						JsonElement.class
+					)
+					.getAsJsonObject();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -59,8 +63,10 @@ public class Setting {
 
 	public static void updateJsonFile() {
 		try {
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			String prettyOutput = gson.toJson(jsonObject);
 			fileWriter = new FileWriter(outputFile, false);
-			fileWriter.write(jsonObject.toString());
+			fileWriter.write(prettyOutput);
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,7 +90,7 @@ public class Setting {
 		public Scale(String n, String k, int l, int u) {
 			super(n);
 			jsonKey = k;
-			value = jsonObject.getInt(k);
+			value = jsonObject.get(k).getAsInt();
 			lowerLimit = l;
 			upperLimit = u;
 			super.container = new SettingContainer(this);
@@ -108,7 +114,7 @@ public class Setting {
 
 		public void updateJson() {
 			jsonObject.remove(jsonKey);
-			jsonObject.put(jsonKey, value);
+			jsonObject.addProperty(jsonKey, value);
 		}
 	}
 
@@ -122,7 +128,7 @@ public class Setting {
 		public Combo(String n, String k, String[] c) {
 			super(n);
 			jsonKey = k;
-			index = jsonObject.getInt(k);
+			index = jsonObject.get(k).getAsInt();
 			value = c[index];
 			choiceList = c;
 			super.container = new SettingContainer(this);
@@ -143,7 +149,7 @@ public class Setting {
 
 		public void updateJson() {
 			jsonObject.remove(jsonKey);
-			jsonObject.put(jsonKey, index);
+			jsonObject.addProperty(jsonKey, index);
 		}
 	}
 
@@ -155,7 +161,7 @@ public class Setting {
 		public Key(String n, String k) {
 			super(n);
 			jsonKey = k;
-			value = jsonObject.getString(k);
+			value = jsonObject.get(k).getAsString();
 			super.container = new SettingContainer(this);
 		}
 
@@ -169,7 +175,7 @@ public class Setting {
 
 		public void updateJson() {
 			jsonObject.remove(jsonKey);
-			jsonObject.put(jsonKey, value);
+			jsonObject.addProperty(jsonKey, value);
 		}
 	}
 
