@@ -12,7 +12,7 @@ public class Tile {
 		SAVE_POINT,
 	}
 
-	public static final int TILE_WIDTH = 60;
+	public static final int TILE_WIDTH = 32;
 
 	private static HashMap<Integer, Tile> tileMap = new HashMap<>();
 

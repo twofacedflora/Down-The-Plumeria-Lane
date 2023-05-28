@@ -4,64 +4,30 @@ public class Player {
 
 	private static final String defaultName = "FRAN";
 
-	private static String currentAnimationFrame = "fran_front_1.png";
+	private static String currentAnimationFrame = "FranFront1.png";
+	private static Player activePlayer; // FIXME
 
-	// The Player's Name
-	private static String playerName = "______";
+	private String name;
 
-	// Get name without extra spaces
-	public static String getName() {
-		String name = playerName.replace("_", "");
+	public Player() {}
+
+	public static Player getActivePlayer() { // FIXME
+		return activePlayer;
+	}
+
+	public static void setActivePlayer(Player p) {
+		activePlayer = p;
+	}
+
+	public String getName() {
 		return name;
 	}
 
-	// Get name with extra spaces
-	public static String getDisplayName() {
-		return (
-			playerName.charAt(0) +
-			"     " +
-			playerName.charAt(1) +
-			"     " +
-			playerName.charAt(2) +
-			"     " +
-			playerName.charAt(3) +
-			"     " +
-			playerName.charAt(4) +
-			"     " +
-			playerName.charAt(5)
-		);
-	}
-
-	// Change a character in the name
-	public static void alterName(int x) {
-		int p = getPointer();
-		if (x == 26 && p > 0) {
-			playerName =
-				playerName.substring(0, p - 1) + '_' + playerName.substring(p, 6);
-		} else if (x < 26 && p < 6) {
-			playerName =
-				playerName.substring(0, p) +
-				Character.toString((char) 65 + x) +
-				playerName.substring(p + 1, 6);
-		}
-	}
-
-	// Auto-Set
-	public static void setName() {
-		playerName = "FRAN__";
-	}
-
-	// Get the first space, if there exists any
-	public static int getPointer() {
-		for (int i = 0; i < 6; i++) {
-			if (playerName.charAt(i) == '_') {
-				return i;
-			}
-		}
-		return 6;
+	public void setName(String n) {
+		name = n;
 	}
 
 	public static String getCurrentAnimationFrame() {
-		return "resources/images/sprites/fran/" + currentAnimationFrame;
+		return "resources/images/sprites32/fran/" + currentAnimationFrame;
 	}
 }

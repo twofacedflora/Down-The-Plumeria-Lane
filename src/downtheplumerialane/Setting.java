@@ -1,10 +1,8 @@
-// TODO: use GSON instead of org.json
-
 package downtheplumerialane;
 
 import com.google.gson.*;
 import java.io.*;
-import java.net.URISyntaxException;
+import java.net.*;
 import java.util.*;
 
 public class Setting {

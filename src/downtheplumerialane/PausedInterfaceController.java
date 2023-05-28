@@ -6,17 +6,17 @@ import javax.swing.*;
 public class PausedInterfaceController {
 
 	private Window window;
-	private KeyMap keyMap;
+	private ControlMap keyMap;
 	private PausedInterface pausedInterface;
 
 	public PausedInterfaceController(Window w, PausedInterface itf) {
 		window = w;
 		pausedInterface = itf;
-		keyMap = new KeyMap(itf);
-		keyMap.mapAction(KeyMap.Command.UP, upAction);
-		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
-		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
-		keyMap.mapAction(KeyMap.Command.BACK, backAction);
+		keyMap = new ControlMap(itf);
+		keyMap.mapAction(ControlMap.Command.UP, upAction);
+		keyMap.mapAction(ControlMap.Command.DOWN, downAction);
+		keyMap.mapAction(ControlMap.Command.CONFIRM, confirmAction);
+		keyMap.mapAction(ControlMap.Command.BACK, backAction);
 	}
 
 	Action upAction = new AbstractAction() {

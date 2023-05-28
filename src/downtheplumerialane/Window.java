@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class Window extends JFrame {
 
-	public static final int WIDTH = 900;
-	public static final int HEIGHT = 600;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
 
 	public static final String VERSION_NUMBER = "0.1.0-alpha";
 
@@ -29,7 +29,7 @@ public class Window extends JFrame {
 
 		switchInterface("title");
 
-		getContentPane().setPreferredSize(new Dimension(900, 600));
+		getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

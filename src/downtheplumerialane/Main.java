@@ -14,3 +14,4 @@ public class Main {
 		);
 	}
 }
+// TODO: i will implement savedata someday. yes

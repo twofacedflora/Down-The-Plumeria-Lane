@@ -29,9 +29,9 @@ public class PausedInterface extends PanelWithBackground {
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		emptyCheckbox =
-			Window.createScaledImageIcon("interface/checkbox_alt.png", 40);
+			Window.createScaledImageIcon("interface/checkbox_alt.png", 32);
 		tickedCheckbox =
-			Window.createScaledImageIcon("interface/ticked_checkbox_alt.png", 40);
+			Window.createScaledImageIcon("interface/ticked_checkbox_alt.png", 32);
 
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
@@ -41,7 +41,8 @@ public class PausedInterface extends PanelWithBackground {
 		for (String o : optionNames) {
 			JLabel ol = new JLabel(o, SwingConstants.CENTER);
 			ol.setHorizontalTextPosition(JLabel.RIGHT);
-			ol.setFont(new Font("Gloria Hallelujah", Font.BOLD, 21));
+			ol.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
+			ol.setForeground(Color.WHITE);
 			ol.setIcon(emptyCheckbox);
 			options.add(ol);
 			optionPanel.add(ol);

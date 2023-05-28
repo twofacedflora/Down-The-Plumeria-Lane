@@ -6,13 +6,13 @@ public class ActiveKeyConfigListener extends KeyAdapter {
 
 	Window window;
 	SettingsMenu menu;
-	KeyMap.Command command;
+	ControlMap.Command command;
 	Setting.Key setting;
 
 	public ActiveKeyConfigListener(Window w, SettingsMenu m, int p, Setting s) {
 		window = w;
 		menu = m;
-		command = KeyMap.Command.values()[p];
+		command = ControlMap.Command.values()[p];
 		setting = (Setting.Key) s;
 	}
 
@@ -63,22 +63,22 @@ public class ActiveKeyConfigListener extends KeyAdapter {
 
 		if (
 			!keyText.equals(setting.getValue()) &&
-			KeyMap.getMappedKeys().contains(keyText)
+			ControlMap.getMappedKeys().contains(keyText)
 		) {
 			invalid = true;
 		}
 
 		if (!invalid) {
-			KeyMap.unmapKeybind(command);
+			ControlMap.unmapKeybind(command);
 			setting.setValue(keyText);
 			setting.updateJson();
 			(
 				(SettingContainer.PressControls) (setting.getContainer().controlField)
 			).setValue(setting.getValue());
 			Setting.updateJsonFile();
-			KeyMap.mapKeybind(command);
+			ControlMap.mapKeybind(command);
 			menu.selectedSetting.toggleActive();
-			KeyMap.setUpdated(true);
+			ControlMap.setUpdated(true);
 			window.removeKeyListener(this);
 		}
 	}

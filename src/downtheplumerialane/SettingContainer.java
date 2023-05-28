@@ -10,22 +10,22 @@ public class SettingContainer extends JPanel {
 	private Setting setting;
 
 	protected JPanel controlField;
-	private JPanel container, div;
+	private JPanel container;
 	private JLabel selector, nameField;
 
 	public SettingContainer(Setting s) {
 		setting = s;
 		container = new JPanel();
-		div = new JPanel();
 		selector =
 			new JLabel(
-				Window.createScaledImageIcon("interface/selected_setting.png", 350)
+				Window.createScaledImageIcon("interface/block_selector.png", 256)
 			);
 		nameField = new JLabel(s.name, SwingConstants.LEFT);
 
 		selector.setAlignmentX(CENTER_ALIGNMENT);
+		selector.setVisible(false);
 
-		nameField.setFont(new Font("Gloria Hallelujah", Font.BOLD, 21));
+		nameField.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
 		nameField.setForeground(Color.WHITE);
 
 		switch (s.getClass().toString()) {
@@ -44,10 +44,8 @@ public class SettingContainer extends JPanel {
 				break;
 		}
 
-		div.setBackground(Color.BLACK);
-
 		container.setLayout(new GridLayout(1, 2));
-		container.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		container.setBorder(BorderFactory.createEmptyBorder(0, 16, 0, 16));
 		container.setOpaque(false);
 
 		setLayout(new OverlayLayout(this));
@@ -57,7 +55,6 @@ public class SettingContainer extends JPanel {
 		container.add(controlField);
 
 		add(container);
-		add(div);
 		add(selector);
 	}
 
@@ -90,12 +87,12 @@ public class SettingContainer extends JPanel {
 		return setting;
 	}
 
-	public void setSelector() {
-		div.setVisible(false);
+	public void showSelector() {
+		selector.setVisible(true);
 	}
 
-	public void removeSelector() {
-		div.setVisible(true);
+	public void hideSelector() {
+		selector.setVisible(false);
 	}
 
 	public void invertColor() {
@@ -138,14 +135,14 @@ public class SettingContainer extends JPanel {
 			value = new JLabel(Integer.toString(v));
 			leftArrow =
 				new JLabel(
-					Window.createScaledImageIcon("interface/arrow_left.png", 40)
+					Window.createScaledImageIcon("interface/arrow_left.png", 32)
 				);
 			rightArrow =
 				new JLabel(
-					Window.createScaledImageIcon("interface/arrow_right.png", 40)
+					Window.createScaledImageIcon("interface/arrow_right.png", 32)
 				);
 
-			value.setFont(new Font("Gloria Hallelujah", Font.BOLD, 21));
+			value.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
 			value.setForeground(Color.WHITE);
 			value.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -157,20 +154,20 @@ public class SettingContainer extends JPanel {
 		public void invertColor() {
 			value.setForeground(Color.BLACK);
 			leftArrow.setIcon(
-				Window.createScaledImageIcon("interface/arrow_left_selected.png", 40)
+				Window.createScaledImageIcon("interface/arrow_left_selected.png", 32)
 			);
 			rightArrow.setIcon(
-				Window.createScaledImageIcon("interface/arrow_right_selected.png", 40)
+				Window.createScaledImageIcon("interface/arrow_right_selected.png", 32)
 			);
 		}
 
 		public void resetColor() {
 			value.setForeground(Color.WHITE);
 			leftArrow.setIcon(
-				Window.createScaledImageIcon("interface/arrow_left.png", 40)
+				Window.createScaledImageIcon("interface/arrow_left.png", 32)
 			);
 			rightArrow.setIcon(
-				Window.createScaledImageIcon("interface/arrow_right.png", 40)
+				Window.createScaledImageIcon("interface/arrow_right.png", 32)
 			);
 		}
 
@@ -191,10 +188,10 @@ public class SettingContainer extends JPanel {
 
 		public void removeActiveArrows() {
 			leftArrow.setIcon(
-				Window.createScaledImageIcon("interface/arrow_left_selected.png", 40)
+				Window.createScaledImageIcon("interface/arrow_left_selected.png", 32)
 			);
 			rightArrow.setIcon(
-				Window.createScaledImageIcon("interface/arrow_right_selected.png", 40)
+				Window.createScaledImageIcon("interface/arrow_right_selected.png", 32)
 			);
 		}
 	}
@@ -209,7 +206,7 @@ public class SettingContainer extends JPanel {
 
 			value = new JLabel(v, SwingConstants.RIGHT);
 
-			value.setFont(new Font("Gloria Hallelujah", Font.BOLD, 21));
+			value.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
 			value.setForeground(Color.WHITE);
 
 			add(value);

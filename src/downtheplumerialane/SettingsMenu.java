@@ -13,8 +13,8 @@ public class SettingsMenu extends JPanel {
 
 	public SettingsMenu(SettingGroup g) {
 		group = g;
-		setLayout(new VerticalGridLayout(4, 2, 20, 0));
-		setPreferredSize(new Dimension(700, 400));
+		setLayout(new VerticalGridLayout(4, 2));
+		setPreferredSize(new Dimension(512, 288));
 		setAlignmentX(CENTER_ALIGNMENT);
 		setOpaque(false);
 	}
@@ -110,12 +110,12 @@ public class SettingsMenu extends JPanel {
 	}
 
 	public void setSelectedState() {
-		selectedSetting.setSelector();
+		selectedSetting.showSelector();
 		selectedSetting.invertColor();
 	}
 
 	public void removeSelectedState() {
-		selectedSetting.removeSelector();
+		selectedSetting.hideSelector();
 		selectedSetting.resetColor();
 	}
 }

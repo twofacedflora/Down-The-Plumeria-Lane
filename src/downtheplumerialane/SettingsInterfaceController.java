@@ -6,7 +6,7 @@ import javax.swing.*;
 public class SettingsInterfaceController {
 
 	private Window window;
-	private KeyMap keyMap;
+	private ControlMap keyMap;
 	private SettingsInterface settingsInterface;
 	private SettingsMenu activeMenu;
 
@@ -14,19 +14,19 @@ public class SettingsInterfaceController {
 		window = w;
 		settingsInterface = itf;
 		activeMenu = itf.getActiveMenu();
-		keyMap = new KeyMap(itf);
-		keyMap.mapAction(KeyMap.Command.UP, upAction);
-		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
-		keyMap.mapAction(KeyMap.Command.LEFT, leftAction);
-		keyMap.mapAction(KeyMap.Command.RIGHT, rightAction);
-		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
-		keyMap.mapAction(KeyMap.Command.BACK, backAction);
+		keyMap = new ControlMap(itf);
+		keyMap.mapAction(ControlMap.Command.UP, upAction);
+		keyMap.mapAction(ControlMap.Command.DOWN, downAction);
+		keyMap.mapAction(ControlMap.Command.LEFT, leftAction);
+		keyMap.mapAction(ControlMap.Command.RIGHT, rightAction);
+		keyMap.mapAction(ControlMap.Command.CONFIRM, confirmAction);
+		keyMap.mapAction(ControlMap.Command.BACK, backAction);
 	}
 
 	Action upAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			if (KeyMap.getUpdated()) {
-				KeyMap.setUpdated(false);
+			if (ControlMap.getUpdated()) {
+				ControlMap.setUpdated(false);
 			} else {
 				activeMenu.verifyLock();
 				activeMenu.moveSelectorUp();
@@ -36,8 +36,8 @@ public class SettingsInterfaceController {
 
 	Action downAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			if (KeyMap.getUpdated()) {
-				KeyMap.setUpdated(false);
+			if (ControlMap.getUpdated()) {
+				ControlMap.setUpdated(false);
 			} else {
 				activeMenu.verifyLock();
 				activeMenu.moveSelectorDown();
@@ -47,8 +47,8 @@ public class SettingsInterfaceController {
 
 	Action leftAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			if (KeyMap.getUpdated()) {
-				KeyMap.setUpdated(false);
+			if (ControlMap.getUpdated()) {
+				ControlMap.setUpdated(false);
 			} else {
 				activeMenu.verifyLock();
 				activeMenu.moveSelectorLeft();
@@ -58,8 +58,8 @@ public class SettingsInterfaceController {
 
 	Action rightAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
-			if (KeyMap.getUpdated()) {
-				KeyMap.setUpdated(false);
+			if (ControlMap.getUpdated()) {
+				ControlMap.setUpdated(false);
 			} else {
 				activeMenu.verifyLock();
 				activeMenu.moveSelectorRight();
@@ -74,8 +74,8 @@ public class SettingsInterfaceController {
 				.selectedSetting.getSetting();
 			SettingContainer container = activeMenu.selectedSetting;
 
-			if (KeyMap.getUpdated()) {
-				KeyMap.setUpdated(false);
+			if (ControlMap.getUpdated()) {
+				ControlMap.setUpdated(false);
 			} else if (setting instanceof Setting.Scale && !(container.getActive())) {
 				container.toggleActive();
 			} else if (setting instanceof Setting.Key && !(container.getActive())) {
@@ -111,8 +111,8 @@ public class SettingsInterfaceController {
 				.selectedSetting.getSetting();
 			SettingContainer container = activeMenu.selectedSetting;
 
-			if (KeyMap.getUpdated()) {
-				KeyMap.setUpdated(false);
+			if (ControlMap.getUpdated()) {
+				ControlMap.setUpdated(false);
 			} else if ((setting instanceof Setting.Scale) && container.getActive()) {
 				container.toggleActive();
 			} else if ((setting instanceof Setting.Key) && container.getActive()) {

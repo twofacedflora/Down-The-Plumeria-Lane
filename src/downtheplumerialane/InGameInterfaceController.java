@@ -6,7 +6,7 @@ import javax.swing.*;
 public class InGameInterfaceController {
 
 	private Window window;
-	private KeyMap keyMap;
+	private ControlMap keyMap;
 	private InGameInterface inGameInterface;
 	private MapContainer mapContainer;
 
@@ -14,13 +14,13 @@ public class InGameInterfaceController {
 		window = w;
 		inGameInterface = itf;
 		mapContainer = itf.getActiveMap();
-		keyMap = new KeyMap(itf);
-		keyMap.mapAction(KeyMap.Command.UP, upAction);
-		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
-		keyMap.mapAction(KeyMap.Command.LEFT, leftAction);
-		keyMap.mapAction(KeyMap.Command.RIGHT, rightAction);
-		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
-		keyMap.mapAction(KeyMap.Command.BACK, backAction);
+		keyMap = new ControlMap(itf);
+		keyMap.mapAction(ControlMap.Command.UP, upAction);
+		keyMap.mapAction(ControlMap.Command.DOWN, downAction);
+		keyMap.mapAction(ControlMap.Command.LEFT, leftAction);
+		keyMap.mapAction(ControlMap.Command.RIGHT, rightAction);
+		keyMap.mapAction(ControlMap.Command.CONFIRM, confirmAction);
+		keyMap.mapAction(ControlMap.Command.BACK, backAction);
 	}
 
 	Action upAction = new AbstractAction() {

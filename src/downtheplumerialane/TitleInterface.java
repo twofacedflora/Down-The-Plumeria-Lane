@@ -16,7 +16,7 @@ public class TitleInterface extends PanelWithBackground {
 
 	private TitleInterfaceController controller;
 	private ImageIcon emptyCheckbox, tickedCheckbox;
-	private JPanel centerContainer, southContainer, mainPanel, optionPanel;
+	private JPanel centerFrameContainer, southFrameContainer, mainPanel, optionPanel;
 	private JLabel title, version;
 	private ArrayList<JLabel> options = new ArrayList<>();
 
@@ -27,16 +27,15 @@ public class TitleInterface extends PanelWithBackground {
 		setName("title");
 		setLayout(new BorderLayout());
 
-		emptyCheckbox = Window.createScaledImageIcon("interface/checkbox.png", 40);
+		emptyCheckbox = Window.createScaledImageIcon("interface/checkbox.png", 32);
 		tickedCheckbox =
-			Window.createScaledImageIcon("interface/ticked_checkbox.png", 40);
+			Window.createScaledImageIcon("interface/ticked_checkbox.png", 32);
 
-		title = new JLabel("Down The Plumeria Lane");
-		title.setFont(new Font("Gloria Hallelujah", Font.BOLD, 54));
+		title = new JLabel(Window.createScaledImageIcon("interface/title.png", -1));
 		title.setAlignmentX(CENTER_ALIGNMENT);
 
 		version = new JLabel("v" + Window.VERSION_NUMBER);
-		version.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
+		version.setFont(new Font("Gloria Hallelujah", Font.BOLD, 12));
 
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
@@ -46,35 +45,33 @@ public class TitleInterface extends PanelWithBackground {
 		for (String o : optionNames) {
 			JLabel ol = new JLabel(o, SwingConstants.CENTER);
 			ol.setHorizontalTextPosition(JLabel.RIGHT);
-			ol.setFont(new Font("Gloria Hallelujah", Font.BOLD, 21));
+			ol.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
 			ol.setIcon(emptyCheckbox);
 			options.add(ol);
 			optionPanel.add(ol);
 		}
 
+		centerFrameContainer = new JPanel();
+		centerFrameContainer.setLayout(new GridBagLayout());
+		centerFrameContainer.setOpaque(false);
+
+		southFrameContainer = new JPanel();
+		southFrameContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		southFrameContainer.setOpaque(false);
+
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(96, 96, 96, 96));
 		mainPanel.setOpaque(false);
 
-		centerContainer = new JPanel();
-		centerContainer.setLayout(new GridBagLayout());
-		centerContainer.setOpaque(false);
-		GridBagConstraints gbc = new GridBagConstraints();
-
-		southContainer = new JPanel();
-		southContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		southContainer.setOpaque(false);
-
-		mainPanel.add(Box.createVerticalStrut(30));
 		mainPanel.add(title);
-		mainPanel.add(Box.createVerticalStrut(70));
 		mainPanel.add(optionPanel);
 
-		centerContainer.add(mainPanel, gbc);
-		southContainer.add(version);
+		centerFrameContainer.add(mainPanel);
+		southFrameContainer.add(version);
 
-		add(centerContainer, BorderLayout.CENTER);
-		add(southContainer, BorderLayout.SOUTH);
+		add(centerFrameContainer, BorderLayout.CENTER);
+		add(southFrameContainer, BorderLayout.SOUTH);
 
 		switchOption(selectorPosition);
 

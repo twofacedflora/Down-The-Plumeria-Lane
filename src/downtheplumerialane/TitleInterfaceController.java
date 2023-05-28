@@ -6,16 +6,16 @@ import javax.swing.*;
 public class TitleInterfaceController {
 
 	private Window window;
-	private KeyMap keyMap;
+	private ControlMap keyMap;
 	private TitleInterface titleInterface;
 
 	public TitleInterfaceController(Window w, TitleInterface itf) {
 		window = w;
 		titleInterface = itf;
-		keyMap = new KeyMap(itf);
-		keyMap.mapAction(KeyMap.Command.UP, upAction);
-		keyMap.mapAction(KeyMap.Command.DOWN, downAction);
-		keyMap.mapAction(KeyMap.Command.CONFIRM, confirmAction);
+		keyMap = new ControlMap(itf);
+		keyMap.mapAction(ControlMap.Command.UP, upAction);
+		keyMap.mapAction(ControlMap.Command.DOWN, downAction);
+		keyMap.mapAction(ControlMap.Command.CONFIRM, confirmAction);
 	}
 
 	Action upAction = new AbstractAction() {

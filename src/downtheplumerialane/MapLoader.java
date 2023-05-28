@@ -1,19 +1,26 @@
 package downtheplumerialane;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import java.util.*;
-import javax.imageio.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 class MapLoader {
 
-	public static final int PLAYER_X = Tile.TILE_WIDTH * 7;
-	public static final int PLAYER_Y = Tile.TILE_WIDTH * 4;
-	public static final int N_PAD = Tile.TILE_WIDTH * 4;
-	public static final int S_PAD = Tile.TILE_WIDTH * 4 + Tile.TILE_WIDTH / 2;
-	public static final int W_PAD = Tile.TILE_WIDTH * 7;
-	public static final int E_PAD = Tile.TILE_WIDTH * 7;
+	public static final int PLAYER_X = (int) (Tile.TILE_WIDTH * 9.5f);
+	public static final int PLAYER_Y = Tile.TILE_WIDTH * 6;
+	public static final int N_PAD = Tile.TILE_WIDTH * 6;
+	public static final int S_PAD = Tile.TILE_WIDTH * 8;
+	public static final int W_PAD = (int) (Tile.TILE_WIDTH * 9.5f);
+	public static final int E_PAD = (int) (Tile.TILE_WIDTH * 9.5f);
 
 	public static int getMapWidth(String f) {
 		int width = 0;
@@ -113,7 +120,7 @@ class MapLoader {
 					Image tile = ImageIO.read(
 						MapLoader.class.getClassLoader()
 							.getResourceAsStream(
-								"resources/images/sprites/env/" +
+								"resources/images/sprites32/env/" +
 								Tile.getTiles().get(t[i][j]).getFilename()
 							)
 					);

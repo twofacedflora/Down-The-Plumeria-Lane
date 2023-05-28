@@ -4,7 +4,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.InputMap;
 
-public class KeyMap {
+public class ControlMap {
 
 	enum Command {
 		UP,
@@ -17,7 +17,7 @@ public class KeyMap {
 
 	private static boolean updated = false;
 	private static ArrayList<String> mappedKeys = new ArrayList<>();
-	private static ArrayList<KeyMap> keyMapList = new ArrayList<>();
+	private static ArrayList<ControlMap> keyMapList = new ArrayList<>();
 
 	private InputMap inputMap;
 	private ActionMap actionMap;
@@ -27,7 +27,7 @@ public class KeyMap {
 		.get(1)
 		.getSettings();
 
-	public KeyMap(JPanel itf) {
+	public ControlMap(JPanel itf) {
 		inputMap = itf.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		actionMap = itf.getActionMap();
 		keyMapList.add(this);
@@ -59,7 +59,7 @@ public class KeyMap {
 	}
 
 	public static void mapKeybind(Command c) {
-		for (KeyMap km : keyMapList) {
+		for (ControlMap km : keyMapList) {
 			Action a = km.actionMap.get(c);
 			if (a != null) {
 				km.mapAction(c, a);
@@ -68,7 +68,7 @@ public class KeyMap {
 	}
 
 	public static void unmapKeybind(Command c) {
-		for (KeyMap km : keyMapList) {
+		for (ControlMap km : keyMapList) {
 			Action a = km.actionMap.get(c);
 			if (a != null) {
 				km.unmapAction(c);
