@@ -12,10 +12,8 @@ public class InGameInterface extends JPanel {
 	public InGameInterface(Window w) {
 		Window.loadFonts(this);
 
-		Tile tile1 = new Tile("Tile1", Tile.Type.PASSABLE, 1, "Tile1.png");
-		Tile wall1 = new Tile("Wall1", Tile.Type.OBSTRUCTED, 2, "Wall0.png");
-		Tile window1 = new Tile("Window1", Tile.Type.OBSTRUCTED, 3, "Window1.png");
-		Tile window2 = new Tile("Window2", Tile.Type.OBSTRUCTED, 4, "Window2.png");
+		// HACK: there has to be a format better than CSV, right?
+		Tile.loadTiles();
 
 		Map testMap = new Map("testmap_3.txt");
 		testMap.addExit(6, 5);
