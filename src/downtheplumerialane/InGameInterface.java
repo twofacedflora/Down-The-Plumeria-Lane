@@ -7,8 +7,6 @@ public class InGameInterface extends JPanel {
 	private InGameInterfaceController controller;
 	private MapContainer activeMap;
 
-	private JLabel player;
-
 	public InGameInterface(Window w) {
 		Window.loadFonts(this);
 
@@ -21,25 +19,14 @@ public class InGameInterface extends JPanel {
 		setActiveMap(testMap.getContainer());
 		activeMap.goToExit(0);
 
-		// TODO: make player sprite graphic instead of component
-		player =
-			new JLabel(
-				new ImageIcon(
-					this.getClass()
-						.getClassLoader()
-						.getResource(Player.getCurrentAnimationFrame())
-				)
-			);
-		player.setAlignmentX(0.5f);
-		player.setAlignmentY(5.5f / 15);
-
 		setName("ingame");
 		setLayout(new OverlayLayout(this));
 
-		add(player);
+		add(Player.getActivePlayer().getComponent());
 		add(activeMap);
 
-		controller = new InGameInterfaceController(w, this);
+		controller =
+			new InGameInterfaceController(w, this, Player.getActivePlayer());
 	}
 
 	public MapContainer getActiveMap() {

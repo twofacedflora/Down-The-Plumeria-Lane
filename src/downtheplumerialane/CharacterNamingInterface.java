@@ -19,6 +19,9 @@ public class CharacterNamingInterface extends PanelWithBackground {
 		setName("characternaming");
 		setLayout(new GridBagLayout());
 
+		// HACK: only load interfaces when needed
+		Player player = new Player();
+
 		topText = new JLabel("Your name, please.");
 		topText.setFont(new Font("Gloria Hallelujah", Font.BOLD, 16));
 		topText.setForeground(Color.WHITE);

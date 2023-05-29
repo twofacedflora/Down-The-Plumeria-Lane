@@ -9,10 +9,12 @@ public class InGameInterfaceController {
 	private ControlMap keyMap;
 	private InGameInterface inGameInterface;
 	private MapContainer mapContainer;
+	private PlayerComponent playerComponent;
 
-	public InGameInterfaceController(Window w, InGameInterface itf) {
+	public InGameInterfaceController(Window w, InGameInterface itf, Player p) {
 		window = w;
 		inGameInterface = itf;
+		playerComponent = p.getComponent();
 		mapContainer = itf.getActiveMap();
 		keyMap = new ControlMap(itf);
 		keyMap.mapAction(ControlMap.Command.UP, upAction);
@@ -23,8 +25,11 @@ public class InGameInterfaceController {
 		keyMap.mapAction(ControlMap.Command.BACK, backAction);
 	}
 
+	// TODO: make player animation timer-based instead of input-based
+
 	Action upAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
+			playerComponent.updateCurrentFrame("UP");
 			mapContainer.moveSourceUp();
 			inGameInterface.repaint();
 		}
@@ -32,6 +37,7 @@ public class InGameInterfaceController {
 
 	Action downAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
+			playerComponent.updateCurrentFrame("DOWN");
 			mapContainer.moveSourceDown();
 			inGameInterface.repaint();
 		}
@@ -39,6 +45,7 @@ public class InGameInterfaceController {
 
 	Action leftAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
+			playerComponent.updateCurrentFrame("LEFT");
 			mapContainer.moveSourceLeft();
 			inGameInterface.repaint();
 		}
@@ -46,6 +53,7 @@ public class InGameInterfaceController {
 
 	Action rightAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
+			playerComponent.updateCurrentFrame("RIGHT");
 			mapContainer.moveSourceRight();
 			inGameInterface.repaint();
 		}

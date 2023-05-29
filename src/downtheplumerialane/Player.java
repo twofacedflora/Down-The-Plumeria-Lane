@@ -1,33 +1,42 @@
 package downtheplumerialane;
 
+import java.util.*;
+
 public class Player {
 
 	private static final String defaultName = "FRAN";
 
-	private static String currentAnimationFrame = "FranFront1.png";
-	private static Player activePlayer; // FIXME
+	private static Player activePlayer;
+
+	private static ArrayList<Player> playerList = new ArrayList<>();
 
 	private String name;
 
-	public Player() {}
+	private PlayerComponent playerComponent;
+
+	public Player() {
+		playerComponent = new PlayerComponent(this);
+		setActivePlayer(this);
+		playerList.add(this);
+	}
 
 	public static Player getActivePlayer() { // FIXME
 		return activePlayer;
-	}
-
-	public static void setActivePlayer(Player p) {
-		activePlayer = p;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String n) {
-		name = n;
+	public PlayerComponent getComponent() {
+		return playerComponent;
 	}
 
-	public static String getCurrentAnimationFrame() {
-		return "resources/images/sprites32/fran/" + currentAnimationFrame;
+	public static void setActivePlayer(Player p) {
+		activePlayer = p;
+	}
+
+	public void setName(String n) {
+		name = n;
 	}
 }

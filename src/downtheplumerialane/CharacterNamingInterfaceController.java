@@ -52,7 +52,7 @@ public class CharacterNamingInterfaceController {
 		}
 	};
 
-	// TODO: trigger exception when namebox is empty
+	// BUG: trigger exception when namebox is empty
 	Action confirmAction = new AbstractAction() {
 		public void actionPerformed(ActionEvent evt) {
 			int pos = keyboard.getSelectorPos();
@@ -65,9 +65,7 @@ public class CharacterNamingInterfaceController {
 						keyboard.toggleCaps();
 						break;
 					case 27:
-						Player player = new Player();
-						player.setName(nameBox.getText());
-						Player.setActivePlayer(player);
+						Player.getActivePlayer().setName(nameBox.getText());
 						window.switchInterface("ingame");
 						break;
 					case 28:
